@@ -100,3 +100,16 @@ To avoid this, I would load only a limited number of notifications at first and 
 * WebSockets give instant updates, but they keep an active connection with the server.
 
 * Caching improves response time, but sometimes users may see slightly old data until the cache is updated.
+
+
+# Stage 5
+
+## Problems in the Current Approach
+
+The current implementation processes every student one by one. If sending an email fails in the middle, some students receive the notification while others do not. This also makes the process slow when the number of students is very large.
+
+## Better Approach
+
+I would first save all notifications to the database and then send emails in the background. This way, the notification is not lost even if email delivery fails. Failed emails can be retried later without affecting the stored notifications.
+
+The in-app notification and email sending should be handled separately because both tasks are independent. This makes the system more reliable and easier to manage.

@@ -58,3 +58,28 @@ I would prefer using MongoDB because it is simple to use and handles large amoun
 
 ## Handling Large Data
 As more notifications are added, fetching all of them at once can become slow. To avoid this, I would use indexes on fields like `studentId`, `isRead`, and `timestamp` because these fields are used often while searching. I would also use pagination so that only a few notifications are loaded at a time instead of loading everything together.
+
+
+# Stage 3
+
+## Query Analysis
+
+The given query fetches unread notifications of a particular student and sorts them by the latest timestamp. This query is correct, but if the notifications table becomes very large, it may take more time to execute.
+
+## Improving Performance
+
+To improve the query performance, I would create indexes on the following fields:
+
+* studentId
+* isRead
+* timestamp
+
+These fields are used frequently while filtering and sorting notifications.
+
+## Should Every Column Have an Index?
+
+No. Creating indexes on every column is not a good idea because it increases storage usage and also makes insert and update operations slower. It is better to create indexes only on columns that are searched or filtered frequently.
+
+## Query to Find Placement Notifications
+
+To find students who received Placement notifications in the last 7 days, I would filter notifications by type and timestamp.

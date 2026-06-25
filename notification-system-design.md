@@ -113,3 +113,14 @@ The current implementation processes every student one by one. If sending an ema
 I would first save all notifications to the database and then send emails in the background. This way, the notification is not lost even if email delivery fails. Failed emails can be retried later without affecting the stored notifications.
 
 The in-app notification and email sending should be handled separately because both tasks are independent. This makes the system more reliable and easier to manage.
+
+
+# Stage 6
+
+## Approach
+
+The notifications are fetched from the given API. To show the priority inbox, I first ignore the notifications that are already read. Then I give a priority based on the notification type. Placement notifications get the highest priority, followed by Results and then Events. If two notifications have the same priority, the latest one is shown first.
+
+After sorting, I display only the top 10 notifications.
+
+When a new notification arrives, it is checked against the current top 10 list. If it has a higher priority, it is added to the list and the lowest priority notification is removed. This keeps the priority inbox updated without sorting everything again.

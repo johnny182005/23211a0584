@@ -83,3 +83,20 @@ No. Creating indexes on every column is not a good idea because it increases sto
 ## Query to Find Placement Notifications
 
 To find students who received Placement notifications in the last 7 days, I would filter notifications by type and timestamp.
+
+
+# Stage 4
+
+## Improving Performance
+
+If notifications are fetched every time the user opens a page, the database will receive too many requests and the application will become slower.
+
+To avoid this, I would load only a limited number of notifications at first and load more only when the user needs them. For new notifications, I would use WebSockets so users can receive updates without refreshing the page. I would also use caching for recently viewed notifications to reduce unnecessary database requests.
+
+## Trade-offs
+
+* Loading fewer notifications makes the application faster, but older notifications need to be loaded separately.
+
+* WebSockets give instant updates, but they keep an active connection with the server.
+
+* Caching improves response time, but sometimes users may see slightly old data until the cache is updated.
